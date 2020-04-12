@@ -127,3 +127,132 @@ public class Calculator implements ActionListener{
         container.add(label);
     }
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* Метод обработки события нажатия на кнопку */
+    public void actionPerformed(ActionEvent e) {
+        /* С помощью оператора if выполняем действие,
+		назначенное на ту кнопку, чье имя совпадаем со
+		строкой, которая передается в качестве параметра
+		встроенному методу equals.*/
+        if (e.getActionCommand().equals("Расчет символов")) {
+			/* Обработка исключения на случай возникновения ошибок
+			в процессе выполнения кода, записанного в боке try.*/
+            try {
+                /* Запускаем метод расчета количества символов */
+                calculate();
+			/* Код, выполняемый при возникновении ошибок
+			в процессе выполнения кода из блока try. */
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Проверьте правильность ввода");
+            }
+        } else if (e.getActionCommand().equals("Авторизация")) {
+        	try {
+                /* Создаем объект класса CalcAuthorization */
+                CalcAuthorization calcAut = new CalcAuthorization();
+				/* Запускаем процесс авторизации */
+                calcAut.runAut();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Проверьте правильность ввода");
+            }
+        } else if (e.getActionCommand().equals("Расчет точек и запятых")) {
+        	try {
+				/* Если авторизация не пройдена - выводим предупреждающее
+				сообщение, в противном случае - запускаем метод расчета количества
+				точек и запятых. */
+                if(getStateId() == false) {
+                	JOptionPane.showMessageDialog(null, "Авторизируйтесь, чтобы получить доступ к этой функции");
+                } else {
+                	calculatePunMarks();
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Проверьте правильность ввода");
+            }
+        } else if (e.getActionCommand().equals("Сброс")) {
+            /* Очищаем все поля через цикл */
+            for(int i=0; i<fields.length; i++){
+                fields[i].setText("");
+            }
+        }
+    }
+    
+    /* Главный метод класса, запускающий калькулятор */
+    public static void main(String[] args) {
+		/* С помощью метода invokeLater запускаем асинхронную операцию,
+		которая сохраняет действие (Runnable), и запускает его на одной
+		из следующих итераций цикла сообщений.*/
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+			/* Создаем метод, который запускает калькулятор
+			через конструктор главного класса.*/
+            public void run() {
+                new Calculator();
+            }
+        });
+    }
+}
