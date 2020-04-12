@@ -126,74 +126,75 @@ public class Calculator implements ActionListener{
         /* Добавляем метку на панель */
         container.add(label);
     }
+	
+    /* Метод добавления текстовых полей */
+    public JTextField addTextField(JComponent container){
+        /* Создаем объект текстового поля */
+        JTextField field = new JTextField();
+        /* Устанавливаем максимально допустимый размер поля */
+        field.setMaximumSize(new Dimension(350,20));
+        /* Добавляем поле на панель */
+        container.add(field);
+        /* Возвращаем ссылку на текстовое поле */
+        return field;
+    }
 
+    /* Метод добавления кнопок */
+    public JButton addButton(JComponent container, String name){
+        /* Создаем объект кнопки */
+        JButton button = new JButton(name);
+        /* Для того, чтобы изменить цвет кнопки
+        if (name == "") {button.setBackground(Color.red);}
+        */
+        /* Устанавливаем максимально допустимый размер кнопки */
+        button.setMaximumSize(new Dimension(100,20));
+        /* Устанавливаем выравнивание по горизонтали (по центру) */
+        button.setHorizontalAlignment(JButton.CENTER);
+        /* Добавляем кнопку на панель */
+        container.add(button);
+        /* Возвращаем ссылку на кнопку */
+        return button;
+    }
+    
+    /* Метод расчета количества символов */
+    public void calculate() throws Exception {
+		/* Записываем введенный текст из поля ввода в переменную */
+    	String getText = fields[0].getText();
+		/* Рассчитываем длину введенного текста */
+        String valueOf = String.valueOf(getText.length());
+		/* Записываем результат расчета в поле вывода */
+        fields[1].setText(valueOf);
+    }
+    
+    /* Метод расчета количества знаков препинания */
+    public void calculatePunMarks() throws Exception {
+		/* Создаем переменную, в которой хранится
+		сумма всех точек и запятых.*/	
+    	int valueOf = 0;
+		/* Записываем введенный текст из поля ввода в переменную */
+    	String getText = fields[0].getText();
+		/* Рассчитываем количество точек и запятых с помощью цикла for */
+    	for (int i = 0; i < getText.length(); i++) {
+			/* Используем условный оператор if
+			для увеличения значения переменной valueOf
+			каждый раз, когда во введенном наборе символов
+			встречается точка или запятая.*/
+    		if ((getText.charAt(i) == ',') || (getText.charAt(i) == '.')) {
+    			valueOf += 1;
+    		}
+    	}
+		/* Преобразовываем тип переменной valueOf
+		из целочисленного типа int в строковый тип String
+        и записываем полученное значение в переменную result.*/		
+    	String result = String.valueOf(valueOf);
+		/* Записываем результат расчета в поле вывода */
+        fields[1].setText(result);
+    }
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    /* С помощью аннотации @Override указываем, что
+	метод, следующий за аннотацией, будет переопределен.*/
+@Override
+
 	/* Метод обработки события нажатия на кнопку */
     public void actionPerformed(ActionEvent e) {
         /* С помощью оператора if выполняем действие,
